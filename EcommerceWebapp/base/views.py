@@ -3,7 +3,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import get_user_model
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
-from .forms import UserAdminCreationForm
+from .forms import UserAdminCreationForm,BrandForm
+from django.contrib.auth.decorators import login_required
 
 def home(request):
     return render(request, 'base/index.html')
@@ -50,3 +51,17 @@ def logoutpage(request):
     logout(request)
 
     return redirect('home')
+
+@login_required(login_url='/login')
+def add_brand(request):
+    form = BrandForm()
+    if request.method == 'POST':
+        form = BrandForm(request.POST)
+        if form.is_valid():
+            brand = form.save(commit=False)
+            brand.owner = request.user
+            brand.save()
+            return redirect('home')
+
+    context = {"forms": form}
+    return render(request, 'base/add-brand.html', context)

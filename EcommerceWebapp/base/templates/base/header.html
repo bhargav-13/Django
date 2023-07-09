@@ -29,6 +29,19 @@
                          <li class="nav-item">
                             <a class="nav-link" href="{% url 'about' %}">About</a>
                          </li>
+
+                         {% if user.user_type == "seller" %}
+                         <li class="nav-item">
+                           <a class="nav-link" href="{% url 'add-brand' %}">Add Brand</a>
+                        </li>
+                        <li class="nav-item">
+                           <a class="nav-link" href="laptop.html">Add Product</a>
+                        </li>
+                        <li class="nav-item">
+                           <a class="nav-link" href="product.html">View Products</a>
+                        </li>
+                        {% else %}
+                        
                          <li class="nav-item">
                             <a class="nav-link" href="computer.html">Computer</a>
                          </li>
@@ -38,6 +51,8 @@
                          <li class="nav-item">
                             <a class="nav-link" href="product.html">Products</a>
                          </li>
+                         {% endif %}
+
                          <li class="nav-item">
                             <a class="nav-link" href="contact.html">Contact Us</a>
                          </li>
