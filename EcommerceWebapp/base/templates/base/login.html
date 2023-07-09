@@ -1,0 +1,126 @@
+{% extends 'base/main.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<style>
+    .login-form{
+        position: absolute;
+        top: 60%;
+        left: 50%;
+        width: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #3f4156;
+        border-radius: 8px;
+    }
+    
+    .login-form *{
+        display: block;
+    }
+    
+    .login-form  .login-cntr{
+        text-align: center;
+        margin-top: 0px;
+        padding: 0px;
+    }
+    .login-form label,p{
+       color: #8b8b8b
+    }
+
+    .login-form a{
+        font-size: 20px;
+        color: green;
+     }
+
+     .login-form a:hover{
+        font-size: 20px;
+        color: blue;
+     }
+    
+    .login-form  .login-cntr h1{
+        display: flex;
+        background-color: #696d97;
+        height: 40px;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .login-form  .login-cntr h2{
+        display: flex;
+        color: #71c6dd;
+        margin-top: 15px;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    form {
+        padding: 15px;
+        color: #696d97;
+    }
+    
+    form *{
+        margin: 10px;
+    }
+    
+    
+    form input{
+        padding: 8px;
+        padding-right: 30%;
+        background-color: #3f4156;
+        border: 1px solid #696d97;
+        border-radius: 8px;
+    }
+</style>
+
+<body>
+  
+
+{% if page == 'login' %}
+<div class="login-form">
+    <div class="login-cntr">
+        <h1>LOGIN</h1>
+    </div>
+
+   <form method="post" action="">
+       {% csrf_token %}
+        {{forms}}
+        <button class="btn btn-primary" type="submit">Login</button>
+    </form>
+
+    <div class="login-cntr">
+        <p>Haven't Signed up Yet?</p>
+        <a href="{% url 'register' %}">Sign Up</a>
+    </div>
+</div>
+
+{% else %}
+
+<div class="login-form">
+    <div class="login-cntr">
+        <h1>REGISTER</h1>
+    </div>
+   <form method="post" action="">
+        {% csrf_token %}
+        <div class="login-content">
+        {% for field in form %}
+             <label>{{field.label}}</label>
+           <div class="abc">
+               {{field}}
+           </div>
+        {% endfor %}
+            <button type="submit" class="btn btn-primary" value="Register">Register</button>
+        </div>
+
+
+    </form>
+    <div class="login-cntr">
+    <p>Already Signed up?</p>
+    <a class="btn btn-primary" href="{% url 'login' %}">Login</a>
+    </div>
+{% endif %}
+</div>
+
+</body>
+
+  {% endblock %}
