@@ -23,3 +23,11 @@ class BrandForm(ModelForm):
         model = Brand
         fields = '__all__'
         exclude = ['owner']
+
+    def __init__(self, *args, **kwargs):
+        self.owner = kwargs.pop('owner', None)
+        super().__init__(*args, **kwargs)
+        if self.owner:
+            self.instance.owner = self.owner
+
+

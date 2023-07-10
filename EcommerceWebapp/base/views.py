@@ -54,13 +54,10 @@ def logoutpage(request):
 
 @login_required(login_url='/login')
 def add_brand(request):
-    form = BrandForm()
+    form = BrandForm(request.POST or None,  request.FILES, owner=request.user)
     if request.method == 'POST':
-        form = BrandForm(request.POST)
         if form.is_valid():
-            brand = form.save(commit=False)
-            brand.owner = request.user
-            brand.save()
+            form.save()
             return redirect('home')
 
     context = {"forms": form}
