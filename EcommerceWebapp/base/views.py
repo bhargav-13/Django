@@ -3,8 +3,9 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import get_user_model
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
-from .forms import UserAdminCreationForm,BrandForm
+from .forms import UserAdminCreationForm,BrandForm, ProductForm
 from django.contrib.auth.decorators import login_required
+from .models import Brand, Product
 
 def home(request):
     return render(request, 'base/index.html')
@@ -59,6 +60,38 @@ def add_brand(request):
         if form.is_valid():
             form.save()
             return redirect('home')
+    else:
+        form = BrandForm()
 
     context = {"forms": form}
     return render(request, 'base/add-brand.html', context)
+
+@login_required(login_url='/login')
+def add_product(request):
+    current_user = request.user
+    brandName = Brand.objects.filter(owner = current_user)
+    print(brandName)
+    form = ProductForm(request.POST or None, request.FILES)
+
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = ProductForm()
+        form.fields['brand'].queryset = brandName
+
+    context = {'forms': form}
+    return render(request, 'base/add-product.html', context)
+
+def showProduct(request):
+    products = Product.objects.all()
+    current_user = request.user
+    brandName = Brand.objects.filter(owner = current_user).values_list('name', flat=True)
+    byUserBrand = Product.objects.filter(brand__name__in = brandName.all())
+    
+    context = {'products': products, 'byUserBrand': byUserBrand}
+    return render(request, 'base/view-product.html', context)
+
+def contact(request):
+    return render(request, 'base/contact.html')

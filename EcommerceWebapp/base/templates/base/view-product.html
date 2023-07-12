@@ -1,0 +1,57 @@
+{% extends 'base/main.html' %}
+{% load static %}
+
+{% block content %}
+
+<body class="main-layout inner_posituong">
+
+    <!-- header -->
+    {% include 'base/header.html' %}
+    <!-- end header inner -->
+    <!-- end header -->
+    <!-- products -->
+    <div  class="products">
+       <div class="container">
+          <div class="row">
+             <div class="col-md-12">
+                <div class="titlepage">
+                   <h2>Your Products</h2>
+                </div>
+             </div>
+          </div>
+          <div class="row">
+             <div class="col-md-12">
+                <div class="our_products">
+                   <div class="row">
+                    {% for product in byUserBrand %}
+                      <div class="col-md-4 margin_bottom1">  
+                        <a class="product-con" href="{% url 'home' %}">
+                            <div class="product_box">
+                                <figure><img src="{{product.image}}" alt="#"/></figure>
+                                <h3>{{product.name}}</h3>
+                                <h4>&#8377; {{product.price}} </h4>
+                            </div>
+                        </a>  
+                      </div>
+                    {% endfor %}
+                   </div>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+    <!-- end products -->
+    <!--  footer -->
+    {% include 'base/footer.html' %}
+    <!-- end footer -->
+    <!-- Javascript files-->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/jquery-3.0.0.min.js"></script>
+    <!-- sidebar -->
+    <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="js/custom.js"></script>
+ </body>
+
+ {% endblock %}

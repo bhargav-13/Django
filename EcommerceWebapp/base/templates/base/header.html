@@ -35,10 +35,10 @@
                            <a class="nav-link" href="{% url 'add-brand' %}">Add Brand</a>
                         </li>
                         <li class="nav-item">
-                           <a class="nav-link" href="laptop.html">Add Product</a>
+                           <a class="nav-link" href="{% url 'add-product' %}">Add Product</a>
                         </li>
                         <li class="nav-item">
-                           <a class="nav-link" href="product.html">View Products</a>
+                           <a class="nav-link" href="{% url 'view-product' %}">View Products</a>
                         </li>
                         {% else %}
                         
@@ -54,7 +54,7 @@
                          {% endif %}
 
                          <li class="nav-item">
-                            <a class="nav-link" href="contact.html">Contact Us</a>
+                            <a class="nav-link" href="{% url 'contact' %}">Contact Us</a>
                          </li>
                          <li class="nav-item d_none">
                             <a class="nav-link" href="#"><i class="fa fa-search" aria-hidden="true"></i></a>

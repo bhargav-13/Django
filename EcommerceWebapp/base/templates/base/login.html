@@ -1,7 +1,7 @@
 {% extends 'base/main.html' %}
 {% load static %}
 
-
+{% comment %} 
 {% block content %}
 
 <style>
@@ -37,23 +37,9 @@
         font-size: 20px;
         color: blue;
      }
+    {% endcomment %}
     
-    .login-form  .login-cntr h1{
-        display: flex;
-        background-color: #696d97;
-        height: 40px;
-        justify-content: center;
-        align-items: center;
-    }
-    
-    .login-form  .login-cntr h2{
-        display: flex;
-        color: #71c6dd;
-        margin-top: 15px;
-        justify-content: center;
-        align-items: center;
-    }
-    
+    {% comment %} 
     form {
         padding: 15px;
         color: #696d97;
@@ -73,9 +59,9 @@
     }
 </style>
 
-<body>
+<body> {% endcomment %}
   
-
+{% comment %} 
 {% if page == 'login' %}
 <div class="login-form">
     <div class="login-cntr">
@@ -123,4 +109,118 @@
 
 </body>
 
-  {% endblock %}
+  {% endblock %} {% endcomment %}
+
+{% comment %} --------------------------------------------------------------------------------------------------------------------------------- {% endcomment %}
+
+  
+  
+  {% block content %}
+
+    <style>
+        *{
+            color: black;
+            font-size: 20px;
+        }
+
+        .login-cntr {
+            display: flex;
+            height: 40px;
+            flex-direction: column;
+            margin-top: 15px;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+
+     <body class="main-layout inner_posituong contact_page">
+        <!-- header -->
+       {% include 'base/header.html' %}
+
+
+       {% if page == 'login' %}
+        <div class="contact">
+           <div class="container">
+              <div class="row">
+                 <div class="col-md-12">
+                    <div class="titlepage">
+                       <h2>Login</h2>
+                    </div>
+                 </div>
+              </div>
+              <div class="row">
+                 <div class="col-md-10 offset-md-1">                  
+                          <form method="post" class="main_form" id="request" action="">
+                            {% csrf_token %}
+                                <div class="row">
+                                    <div class="col-md-12">
+                                    {{forms}}
+                                    </div>
+                                    <div class="col-md-12">
+                                    <button class="send_btn" type="submit">Login</button>
+                                    </div>
+                                </div>
+                            <div class="login-cntr">
+                                <p>Don't have Account?</p>
+                                <a class="btn btn-primary" href="{% url 'register' %}">Register</a>
+                            </div>
+                         </form>
+                         
+                 </div>
+              </div>
+           </div>
+        </div>
+
+    {% else %}
+
+    <div class="contact">
+        <div class="container">
+           <div class="row">
+              <div class="col-md-12">
+                 <div class="titlepage">
+                    <h2>Register</h2>
+                 </div>
+              </div>
+           </div>
+           <div class="row">
+              <div class="col-md-10 offset-md-1">                  
+                       <form method="post" class="main_form" id="request" action="">
+                         {% csrf_token %}
+                             <div class="row">
+                                {% for field in form %}
+                                <label>{{field.label}}</label>
+                                <div class="col-md-12 ">
+                                  {{field}}
+                                </div>
+                                {% endfor %}
+                                 <div class="col-md-12">
+                                 <button class="send_btn" type="submit">Register</button>
+                             </div>
+                         </div>
+                         <div class="login-cntr">
+                            <p>Already Registered?</p>
+                            <a class="btn btn-primary" href="{% url 'login' %}">LOGIN</a>
+                        </div>
+                     </form>
+              </div>
+           </div>
+        </div>
+     </div>
+
+     {% endif %}
+
+        <!-- end contact -->
+        <!--  footer -->
+        {% include 'base/footer.html' %}
+        <!-- Javascript files-->
+        <script src="js/jquery.min.js"></script>
+        <script src="js/popper.min.js"></script>
+        <script src="js/bootstrap.bundle.min.js"></script>
+        <script src="js/jquery-3.0.0.min.js"></script>
+        <!-- sidebar -->
+        <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+        <script src="js/custom.js"></script>
+     </body>
+  
+     {% endblock %}
+  

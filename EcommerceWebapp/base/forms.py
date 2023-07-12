@@ -4,7 +4,7 @@ from .models import CustomUser
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 from django.forms import ModelForm
-from .models import Brand
+from .models import Brand, Product
 
 
 class UserAdminCreationForm(UserCreationForm):
@@ -30,4 +30,10 @@ class BrandForm(ModelForm):
         if self.owner:
             self.instance.owner = self.owner
 
+
+class ProductForm(ModelForm):
+
+    class Meta:
+        model = Product
+        fields = '__all__'
 
