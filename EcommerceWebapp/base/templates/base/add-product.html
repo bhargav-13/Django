@@ -34,7 +34,7 @@
               </div>
               <div class="row">
                  <div class="col-md-10 offset-md-1">                  
-                          <form method="post" class="main_form" id="request" action="">
+                          <form method="post" class="main_form" enctype="multipart/form-data" id="request" action="">
                             {% csrf_token %}
                                 <div class="row">
                                     {% for field in forms%}

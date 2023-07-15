@@ -14,7 +14,7 @@
       <h2>Categories</h2>
       <a href="">All</a>
       {% for category in allCategory %}
-      <a href="">{{category.name}}</a>
+      <a href="{% url 'productsBycategories' category_id=category.id %}">{{category.name}}</a>
       {% endfor %}
    </div>
 
