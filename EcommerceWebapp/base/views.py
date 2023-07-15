@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from .forms import UserAdminCreationForm,BrandForm, ProductForm
 from django.contrib.auth.decorators import login_required
-from .models import Brand, Product
+from .models import Brand, Product, Category
 
 def home(request):
     return render(request, 'base/index.html')
@@ -95,3 +95,12 @@ def showProduct(request):
 
 def contact(request):
     return render(request, 'base/contact.html')
+
+def ProductsByCategories(request, category_id):
+    allCategory = Category.objects.all()
+
+    category = Category.objects.get(id=category_id)
+    products = Product.objects.filter(category=category)
+    
+    context = {'products': products, 'allCategory': allCategory}
+    return render(request, 'base/product.html', context)

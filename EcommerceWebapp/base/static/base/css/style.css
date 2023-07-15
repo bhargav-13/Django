@@ -602,10 +602,24 @@ ul.btn li:last-child {
 
 /** products section **/
 
+
+.ProductView{
+     display: grid;
+     grid-template-columns: 1fr 3fr;
+}
+
+.category{
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     flex-direction: column;
+}
+
 .products {
      margin-top: 90px;
      background: #f7f7f7;
      padding: 90px 0 90px 0;
+     
 }
 
 .our_products {
@@ -618,8 +632,12 @@ ul.btn li:last-child {
      margin-bottom: 30px;
 }
 
+
+
 .our_products a:hover img{
           height: 220px; 
+          transition-duration: 2s;
+          transition-property: all; 
 }
 
 .our_products .product_box figure {
@@ -639,7 +657,10 @@ ul.btn li:last-child {
      transition: ease-in all 0.5s;
 }
 .our_products .product_box img {
-    height: 200px;
+    height: 50px;
+    width: 50px;
+    transition-duration: 2s;
+    transition-property: all;
 }
 
 

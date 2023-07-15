@@ -3,90 +3,60 @@
 
 
 {% block content %}
-
 <style>
-    .login-form{
-        position: absolute;
-        top: 60%;
-        left: 50%;
-        width: 50%;
-        transform: translate(-50%, -50%);
-        background-color: #3f4156;
-        border-radius: 8px;
-    }
-    
-    .login-form *{
-        display: block;
-    }
-    
-    .login-form  .login-cntr{
-        text-align: center;
-        margin-top: 0px;
-        padding: 0px;
-    }
-    .login-form label,p{
-       color: #8b8b8b
+    *{
+        color: black;
+        font-size: 20px;
     }
 
-    .login-form a{
-        font-size: 20px;
-        color: green;
-     }
-
-     .login-form a:hover{
-        font-size: 20px;
-        color: blue;
-     }
-    
-    .login-form  .login-cntr h1{
+    .login-cntr {
         display: flex;
-        background-color: #696d97;
         height: 40px;
-        justify-content: center;
-        align-items: center;
-    }
-    
-    .login-form  .login-cntr h2{
-        display: flex;
-        color: #71c6dd;
+        flex-direction: column;
         margin-top: 15px;
         justify-content: center;
         align-items: center;
     }
-    
-    form {
-        padding: 15px;
-        color: #696d97;
-    }
-    
-    form *{
-        margin: 10px;
-    }
-    
-    
-    form input{
-        padding: 8px;
-        padding-right: 30%;
-        background-color: #3f4156;
-        border: 1px solid #696d97;
-        border-radius: 8px;
-    }
 </style>
 
-<body>
-  
-<div class="login-form">
-    <div class="login-cntr">
-        <h1>ADD Product</h1>
-    </div>
+     <body class="main-layout inner_posituong contact_page">
+        <!-- header -->
+       {% include 'base/header.html' %}
 
-   <form method="post" action="" enctype="multipart/form-data">
-       {% csrf_token %}
-        {{forms}}
-        <button class="btn btn-primary" type="submit">ADD</button>
-    </form>
-</div>
-
+        <div class="contact">
+           <div class="container">
+              <div class="row">
+                 <div class="col-md-12">
+                    <div class="titlepage">
+                       <h2>Add Product</h2>
+                    </div>
+                 </div>
+              </div>
+              <div class="row">
+                 <div class="col-md-10 offset-md-1">                  
+                          <form method="post" class="main_form" id="request" action="">
+                            {% csrf_token %}
+                                <div class="row">
+                                    {% for field in forms%}
+                                    <label>{{field.label}}</label>
+                                    <div class="col-md-12 ">
+                                    {{field}}
+                                    </div>
+                                    {% endfor %}
+                                    <div class="col-md-12">
+                                    <button class="send_btn" type="submit">Add Product</button>
+                                    </div>
+                                </div>
+                            <div class="login-cntr">
+                                <p>Want to add Brand</p>
+                                <a class="btn btn-primary" href="{% url 'add-brand' %}">Add Brand</a>
+                            </div>
+                         </form>
+                         
+                 </div>
+              </div>
+           </div>
+        </div>
 </body>
 
   {% endblock %}
