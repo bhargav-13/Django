@@ -11,8 +11,8 @@
     <!-- products -->
 <div class="ProductView">
    <div class="category">
-      <h2>Categories</h2>
-      <a href="">All</a>
+      <h2><u>Categories</u></h2>
+      <a href="{% url 'productsBycategories' category_id=0 %}">All</a>
       {% for category in allCategory %}
       <a href="{% url 'productsBycategories' category_id=category.id %}">{{category.name}}</a>
       {% endfor %}
@@ -33,7 +33,7 @@
                    <div class="row">
                     {% for product in products %}
                         <div class="col-md-4 margin_bottom1">  
-                           <a class="product-con" href="{% url 'home' %}">
+                           <a class="product-con" href="{% url 'product-details' product.id %}">
                               <div class="product_box">
                                  <figure><img src="{{product.image.url}}" alt="{{product.image}}"/></figure>
                                  <h3>{{product.name}}</h3>

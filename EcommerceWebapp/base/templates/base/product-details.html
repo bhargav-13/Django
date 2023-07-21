@@ -1,0 +1,40 @@
+{% extends 'base/main.html' %}
+{% load static %}
+
+{% block content %}
+<body class="main-layout inner_posituong contact_page">
+    {% include 'base/header.html' %}
+
+    <div class="product-detaiils">
+
+        <div class="details-main">
+            <div class="details-img">
+                <img src="{{p.image.url}}" alt="{{p.name}}">
+            </div>
+    
+            <div class="details-desc">
+                <h1><b> {{p.name}} </b></h1>
+                <small> {{p.category.name}} </small>
+                <h3> {{p.description}} </h3>
+                <h2><b>CURRENT PRICE:</b> {{p.price}} &#8377; </h2>
+
+                <a href="">
+                    <div class="details-brand">
+                        <h4>Brand: </h4>
+                        <img src="{{p.brand.logo.url}}" alt="">
+                    </div>
+                </a>
+
+                <hr>
+
+                <div class="details-button">
+                    <a href="" class="Cart-button">Add to Cart  <i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+                    
+                    <a href="" class="fav-button">Add to favourite  <i class="fa fa-heart" aria-hidden="true"></i></a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+{% endblock %}

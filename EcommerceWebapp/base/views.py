@@ -8,7 +8,11 @@ from django.contrib.auth.decorators import login_required
 from .models import Brand, Product, Category
 
 def home(request):
-    return render(request, 'base/index.html')
+    products = Product.objects.filter(id__lte = 6)
+
+    return render(request, 'base/index.html',{
+        'products': products,
+    })
 
 def loginPage(request):
     page = 'login'
@@ -99,8 +103,18 @@ def contact(request):
 def ProductsByCategories(request, category_id):
     allCategory = Category.objects.all()
 
-    category = Category.objects.get(id=category_id)
-    products = Product.objects.filter(category=category)
+    if(category_id == 0):
+        products = Product.objects.all()
+    else:
+        category = Category.objects.get(id=category_id)
+        products = Product.objects.filter(category=category)
     
     context = {'products': products, 'allCategory': allCategory}
     return render(request, 'base/product.html', context)
+
+def ProductDetails(request, pid):
+    productDet = Product.objects.get(id=pid)
+
+    context = {'p': productDet}
+
+    return render(request, 'base/product-details.html', context)

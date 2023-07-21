@@ -16,7 +16,8 @@ urlpatterns = [
 
     path('contact/', views.contact, name="contact"),
 
-    path('product/<int:category_id>', views.ProductsByCategories, name="productsBycategories")
+    path('product/<int:category_id>', views.ProductsByCategories, name="productsBycategories"),
+    path('product-details/<int:pid>', views.ProductDetails, name="product-details"),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
