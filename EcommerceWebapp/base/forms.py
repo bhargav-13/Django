@@ -37,3 +37,5 @@ class ProductForm(ModelForm):
         model = Product
         fields = '__all__'
 
+    
+

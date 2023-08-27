@@ -43,7 +43,7 @@
                         {% else %}
                         
                          <li class="nav-item">
-                            <a class="nav-link" href="{% url 'productsBycategories' category_id=1 %}">Computer</a>
+                            <a class="nav-link"  href="{% url 'productsBycategories' category_id=1 %}">Computer</a>
                          </li>
                          <li class="nav-item">
                             <a class="nav-link" href="{% url 'productsBycategories' category_id=2 %}">Laptop</a>
@@ -56,16 +56,26 @@
                          <li class="nav-item">
                             <a class="nav-link" href="{% url 'contact' %}">Contact Us</a>
                          </li>
+
                          <li class="nav-item d_none">
                             <a class="nav-link" href="#"><i class="fa fa-search" aria-hidden="true"></i></a>
                          </li>
-                         <li class="nav-item d_none">
-                           {% if user.is_authenticated %}
-                            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-                           {% else %}
-                            <a class="nav-link" href="{% url 'login' %}">Login</a>
-                           {% endif %}
-                         </li>
+                        <li class="nav-item d_none">
+                              {% if user.is_authenticated %}
+                              <div class="dropdown nav-link">
+                                 <a class="dropbtn"><i class="fa fa-user" aria-hidden="true"></i></a>
+                                 <div class="dropdown-content">
+                                 <a href="{% url 'logout' %}">Logout</a>
+                                 <a href="{% url 'cart' %}">Cart</a>
+                                 <a href="#">Wishlist</a>
+                                 </div>
+                              </div>
+                             {% else %}
+                             <div class="dropdown nav-link" >
+                                 <a class="dropbtn" href="{% url 'login' %}">Login<i class="fa fa-sign-in" aria-hidden="true"></i></a>
+                              </div>
+                              {% endif %}
+                        </li>
                       </ul>
                    </div>
                 </nav>

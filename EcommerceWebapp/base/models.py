@@ -54,5 +54,19 @@ class Product(models.Model):
     def __str__(self):
         return self.name
     
+class Cart(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    products = models.ManyToManyField(Product) 
+    updated = models.DateTimeField(auto_now=True)
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def calculate_total(self):
+        total = sum(product.price for product in self.products.all())
+        return total
+    
+    def add_to_cart(self, product):
+        self.products.add(product)
+    
+    
 
 

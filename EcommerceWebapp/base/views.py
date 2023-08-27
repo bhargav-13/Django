@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from .forms import UserAdminCreationForm,BrandForm, ProductForm
 from django.contrib.auth.decorators import login_required
-from .models import Brand, Product, Category
+from .models import Brand, Product, Category, Cart
 
 def home(request):
     products = Product.objects.filter(id__lte = 6)
@@ -118,3 +118,25 @@ def ProductDetails(request, pid):
     context = {'p': productDet}
 
     return render(request, 'base/product-details.html', context)
+
+def CartView(request):
+    user_cart, created = Cart.objects.get_or_create(user=request.user)
+    cart_products = user_cart.products.all()
+    total = user_cart.calculate_total()
+    
+    return render(request, 'base/cart.html', {
+        'products': cart_products, 
+        'toatl': total
+    })
+
+def AddToCart(request, pk):
+    product = Product.objects.get(pk = pk)
+    print(product)
+    user = request.user
+    
+    cart, created = Cart.objects.get_or_create(user=user)
+    
+    # Add the product to the cart
+    cart.products.add(product)
+    
+    return redirect('cart')
