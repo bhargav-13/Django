@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your Cart</title>
+</head>
+<body>
+    <h1>Your Cart</h1>
+    <ul>
+        {% for item in cart_items %}
+            <li>
+                Product: {{ item.product.name }}     
+            </li>
+            <li>
+                Quantity: {{ item.quantity }}
+            </li>
+            <li>
+                Price: ${{ item.product.price }}
+            </li>
+            <li>
+                <a href="">Remove from cart</a>
+            </li>
+        {% empty %}
+            <li>Your cart is empty.</li>
+        {% endfor %}
+    </ul>
+    <p>Total Price: ${{ total_price }}</p>
+    <a href="">Proceed to Checkout</a>
+</body>
+</html>
