@@ -122,11 +122,16 @@ def ProductDetails(request, pid):
 def CartView(request):
     user_cart, created = Cart.objects.get_or_create(user=request.user)
     cart_products = user_cart.products.all()
+    
     total = user_cart.calculate_total()
+    
+    num_items = len(cart_products)
     
     return render(request, 'base/cart.html', {
         'products': cart_products, 
-        'toatl': total
+        'subtotal': total,
+        'total': total+50,
+        'item_num': num_items
     })
 
 def AddToCart(request, pk):
