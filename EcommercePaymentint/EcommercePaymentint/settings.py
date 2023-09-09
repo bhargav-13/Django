@@ -37,8 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'base', 
     'rest_framework', 
+    'base',
     'api'
 ]
 
@@ -126,5 +126,7 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-ITL_ACCESS_TOKEN = 'd4230b5d70c845e0a10eda448084d7ed'
-ITL_SECRET_KEY = '25496b4ea1ecc8d22868da387ef082fb'
+ITL_ACCESS_TOKEN = '5a7b40197cd919337501dd6e9a3aad9a'
+ITL_SECRET_KEY = '2b54c373427be180d1899400eeb21aab'
+
+ALLOWED_HOSTS = ['127.0.0.1']

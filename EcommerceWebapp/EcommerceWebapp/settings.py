@@ -44,6 +44,17 @@ INSTALLED_APPS = [
     'rest_framework',
 ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+}
+
+ALLOWED_HOSTS = ['127.0.0.1']
+
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
@@ -137,3 +148,6 @@ STATICFILES_DIR = [
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+ITL_ACCESS_TOKEN = '5a7b40197cd919337501dd6e9a3aad9a'
+ITL_SECRET_KEY = '2b54c373427be180d1899400eeb21aab'

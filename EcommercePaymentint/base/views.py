@@ -1,23 +1,23 @@
 from django.shortcuts import render
-from .models import Product, CartItem
-from django.http import HttpResponse
+from .models import Cart, CartItem, Product, ProductImage
+from django import template
+
+register = template.Library()
+
+@register.simple_tag()
+def multiply(qty, unit_price, *args, **kwargs):
+    # you would need to do any localization of the result here
+    return qty * unit_price
 
 
-def product_list(request):
-    # products = Product.objects.all()
-    # return render(request, 'store/product_list.html', {'products': products})
-    return HttpResponse("<h1>All Products...</h1>")
-
-def product_detail(request, product_id):
-    # product = Product.objects.get(id=product_id)
-    # return render(request, 'store/product_detail.html', {'product': product})
-    pass
-
-def cart(request):
-    cart_items = CartItem.objects.filter(user=1)
+def view_cart(request):
+    cart = Cart.objects.get_or_create(user=request.user)[0]
+    cart_items = CartItem.objects.filter(cart=cart)
+    cart_total = calculate_cart_total(cart_items)
     
-    total_price = sum(cart_item.product.price * cart_item.quantity for cart_item in cart_items)
-    return render(request, 'base/cart.html', {
-        'cart_items': cart_items,
-        'total_price': total_price
-        })
+    
+    return render(request, 'base/view_cart.html', {'cart': cart, 'cart_items': cart_items, 'cart_total': cart_total})
+
+def calculate_cart_total(cart_items):
+    total = sum(item.product.product_price * item.quantity for item in cart_items)
+    return total

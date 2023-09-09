@@ -20,7 +20,9 @@ urlpatterns = [
     path('product-details/<int:pid>', views.ProductDetails, name="product-details"),
     
     path('cart/', views.CartView, name="cart"),
-    path('Add-to-cart/<str:pk>', views.AddToCart, name='addCart')
+    path('Add-to-cart/<str:pk>', views.AddToCart, name='addCart'),
+    
+    path('create-order/', views.create_order, name='create-order')
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

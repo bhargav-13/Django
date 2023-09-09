@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from .manager import UserManager
 from django.contrib.auth import get_user_model
+import uuid
 
 
 class CustomUser(AbstractUser):
@@ -66,6 +67,28 @@ class Cart(models.Model):
     
     def add_to_cart(self, product):
         self.products.add(product)
+        
+class Order(models.Model):
+    order_no = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+    total = models.DecimalField(max_digits=10, decimal_places=2)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    state = models.CharField(max_length=50, null=False)
+    coutry = models.CharField(max_length=50, null=False)
+    is_prepaid = models.BooleanField(default=False)
+    products = models.ManyToManyField(Product, through='OrderItem')
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    def calculate_total(self):
+        total = sum(product.price for product in self.products.all())
+        return total
+
+class OrderItem(models.Model):
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField()
+
+    def __str__(self):
+        return f"{self.quantity} x {self.product.name} in Order {self.order.order_no}"
     
     
 

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Shopping Cart</title>
+    <style>
+        /* Add this to your CSS file or within a <style> block in your HTML file */
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #f0f0f0;
+            }
+            
+            h1 {
+                background-color: #333;
+                color: #fff;
+                padding: 10px;
+                text-align: center;
+            }
+            
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 20px;
+            }
+            
+            table, th, td {
+                border: 1px solid #ddd;
+            }
+            
+            th, td {
+                padding: 10px;
+                text-align: left;
+            }
+            
+            th {
+                background-color: #333;
+                color: #fff;
+            }
+            
+            tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+            
+            tr:hover {
+                background-color: #ddd;
+            }
+            
+            p {
+                text-align: right;
+                margin-top: 10px;
+                font-weight: bold;
+            }
+            
+            a {
+                display: block;
+                text-align: center;
+                padding: 10px;
+                background-color: #333;
+                color: #fff;
+                text-decoration: none;
+                margin-top: 20px;
+                width: 150px;
+                margin: 0 auto;
+            }
+            
+            a:hover {
+                background-color: #555;
+            }            
+    </style>
+</head>
+<body>
+    <h1>Your Shopping Cart</h1>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in cart_items %}
+            <tr>
+                <td>{{ item.product.product_name }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>${{ item.product.product_price }}</td>
+                <td>${{ item.total_cost }}</td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="4">Your cart is empty.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <p>Total: ${{ cart_total }}</p>
+
+    <a href="#">Proceed to Checkout</a>
+</body>
+</html>

@@ -4,7 +4,7 @@ from .models import CustomUser
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 from django.forms import ModelForm
-from .models import Brand, Product
+from .models import Brand, Product, Order
 
 
 class UserAdminCreationForm(UserCreationForm):
@@ -38,4 +38,9 @@ class ProductForm(ModelForm):
         fields = '__all__'
 
     
-
+class Orderform(ModelForm):
+    
+    class Meta:
+        model = Order
+        fields = '__all__'
+        exclude = ['user', 'total', 'products']

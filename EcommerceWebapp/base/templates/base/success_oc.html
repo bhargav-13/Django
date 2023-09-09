@@ -1,0 +1,44 @@
+{% extends 'base/main.html' %}
+{% load static %}
+  
+  
+  {% block content %}
+  <style>
+      *{
+          color: black;
+          font-size: 20px;
+      }
+  
+      .login-cntr {
+          display: flex;
+          height: 40px;
+          flex-direction: column;
+          margin-top: 15px;
+          justify-content: center;
+          align-items: center;
+      }
+  </style>
+  
+       <body class="main-layout inner_posituong contact_page">
+         {% include 'base/header.html' %}
+  
+          <div class="contact">
+             <div class="container">
+                <div class="row">
+                   <div class="col-md-12">
+                      <div class="titlepage">
+                         <h2>Order Successfullr</h2>
+                      </div>
+                   </div>
+                </div>
+                <div class="row">
+                   <div class="col-md-10 offset-md-1">                  
+                           
+                   </div>
+                </div>
+             </div>
+          </div>
+  </body>
+  
+    {% endblock %}
+  
